@@ -1,19 +1,35 @@
 <template name="gamePage">
-    <table>
-        {{#each board}}
-        <tr>
-            {{#each this}}
-            <td class="board-cell" data-i="{{this.i}}" data-j="{{this.j}}">
-                {{#if winner}}
-                <span class="winner">{{this.p}}</span>
-                {{else}}
-                {{this.p}}
-                {{/if}}
-            </td>
-            {{/each}}
-        </tr>
-        {{/each}}
-    </table>
+    <div class="row">
+        <div class="col-xs-8">
+            <table>
+                {{#each board}}
+                <tr>
+                    {{#each this}}
+                    <td class="board-cell" data-i="{{this.i}}" data-j="{{this.j}}">
+                        {{#if winner}}
+                        <span class="winner">{{this.p}}</span>
+                        {{else}}
+                        {{this.p}}
+                        {{/if}}
+                    </td>
+                    {{/each}}
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="col-xs-4">
+            <h4>History:</h4>
+            <ul>
+                {{#each moves}}
+                <li><strong>{{p}}</strong> on [{{i}},{{j}}]</li>
+                {{/each}}
+            </ul>
+            {{#if winner}}
+            <h4 class="winner">Winner: {{winner}}</h4>
+            {{/if}}
+        </div>
+    </div>
 </template>
 
 

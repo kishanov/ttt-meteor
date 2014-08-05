@@ -14,7 +14,7 @@
     cursor: pointer;
 }
 
-.board-cell .winner {
+.winner {
     color: crimson;
     font-weight: bold;
 }
