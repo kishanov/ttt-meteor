@@ -13,3 +13,8 @@
 .board-cell:hover {
     cursor: pointer;
 }
+
+.board-cell .winner {
+    color: crimson;
+    font-weight: bold;
+}

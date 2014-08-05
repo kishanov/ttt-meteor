@@ -16,7 +16,7 @@
 
         <ul>
             {{#each games}}
-            <li><a href="{{pathFor 'gamePage'}}">{{_id}}</a> - {{status}}</li>
+            <li><a href="{{pathFor 'gamePage'}}">{{_id}}</a> ({{size}}) - <span class="text-muted">{{status}}</span></li>
             {{/each}}
         </ul>
     </div>

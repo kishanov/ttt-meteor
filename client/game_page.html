@@ -3,7 +3,13 @@
         {{#each board}}
         <tr>
             {{#each this}}
-            <td class="board-cell" data-i="{{this.i}}" data-j="{{this.j}}">{{this.p}}</td>
+            <td class="board-cell" data-i="{{this.i}}" data-j="{{this.j}}">
+                {{#if winner}}
+                <span class="winner">{{this.p}}</span>
+                {{else}}
+                {{this.p}}
+                {{/if}}
+            </td>
             {{/each}}
         </tr>
         {{/each}}

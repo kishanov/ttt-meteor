@@ -34,10 +34,6 @@ var nextPlayer = function (moves) {
 }
 
 
-var transpose = function (board) {
-    _.zip.apply(_, board);
-}
-
 
 var splitArray = function (a, n) {
     var len = a.length, out = [], i = 0;
@@ -95,7 +91,17 @@ var gameState = function (game) {
 
 Template.gamePage.helpers({
     board: function () {
-        return playAGame(createEmptyBoard(this.size), this.moves);
+        var board = playAGame(createEmptyBoard(this.size), this.moves);
+        var state = gameState(board);
+
+        if (state.combos != null) {
+            return _.reduce(_.flatten(state.combos), function(memo, cur) {
+                memo[cur.i][cur.j].winner = true;
+                return memo;
+            }, board);
+        } else {
+            return board;
+        }
     }
 });
 
@@ -104,24 +110,26 @@ Template.gamePage.events({
     'click .board-cell': function (e) {
         var gameId = _.last(window.location.pathname.split("/"));
         var beforeMove = Games.findOne(gameId);
+        var move = {
+            i: parseInt(e.target.getAttribute("data-i")),
+            j: parseInt(e.target.getAttribute("data-j")),
+            p: nextPlayer(beforeMove.moves)
+        };
+        var isCellMarked = _.find(beforeMove.moves, function(m) {
+            return move.i == m.i && move.j == m.j;
+        });
 
-        if (e.target.innerHTML == " " && beforeMove.winner == null) {
-            var move = {
-                i: parseInt(e.target.getAttribute("data-i")),
-                j: parseInt(e.target.getAttribute("data-j")),
-                p: nextPlayer(beforeMove.moves)
-            };
+
+        if (!isCellMarked && beforeMove.winner == null) {
             var moves = _.clone(beforeMove.moves);
             moves.push(move);
 
             var afterMove = playAGame(createEmptyBoard(beforeMove.size), moves);
 
-            console.log(gameState(afterMove));
-
-            var updateParams = _.omit(gameState(afterMove), 'combos');
 
             Games.update(gameId,
-                {$set: _.extend(updateParams, {moves: moves})});
+                {$set: _.extend(_.omit(gameState(afterMove), 'combos'),
+                    {moves: moves})});
         }
     }
 });
