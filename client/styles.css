@@ -1,0 +1,15 @@
+.board-cell {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 40px;
+    min-width: 50px;
+    min-height: 50px;
+    width: 50px;
+    height: 50px;
+}
+
+
+.board-cell:hover {
+    cursor: pointer;
+}
