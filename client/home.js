@@ -11,7 +11,7 @@ Template.home.events({
             status: "in-progress",
             size: parseInt($("#board-size").val()),
             winner: null,
-            movements: []
+            moves: []
         };
 
         game._id = Games.insert(game);

@@ -2,7 +2,6 @@
   "packages": {
     "bootstrap-3": {},
     "iron-router": {},
-    "spin": {},
-    "lodash": {}
+    "spin": {}
   }
 }
