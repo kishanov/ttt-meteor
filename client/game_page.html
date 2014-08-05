@@ -19,7 +19,11 @@
         </div>
 
         <div class="col-xs-4">
-            <h4>History:</h4>
+            <h4>History:
+                <button type="button" class="btn btn-default btn-xs" id="undo-last-move">
+                    <span class="glyphicon glyphicon-repeat"></span> Undo
+                </button>
+            </h4>
             <ul>
                 {{#each moves}}
                 <li><strong>{{p}}</strong> on [{{i}},{{j}}]</li>

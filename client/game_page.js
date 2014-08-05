@@ -34,7 +34,6 @@ var nextPlayer = function (moves) {
 }
 
 
-
 var splitArray = function (a, n) {
     var len = a.length, out = [], i = 0;
     while (i < len) {
@@ -95,7 +94,7 @@ Template.gamePage.helpers({
         var state = gameState(board);
 
         if (state.combos != null) {
-            return _.reduce(_.flatten(state.combos), function(memo, cur) {
+            return _.reduce(_.flatten(state.combos), function (memo, cur) {
                 memo[cur.i][cur.j].winner = true;
                 return memo;
             }, board);
@@ -115,7 +114,7 @@ Template.gamePage.events({
             j: parseInt(e.target.getAttribute("data-j")),
             p: nextPlayer(beforeMove.moves)
         };
-        var isCellMarked = _.find(beforeMove.moves, function(m) {
+        var isCellMarked = _.find(beforeMove.moves, function (m) {
             return move.i == m.i && move.j == m.j;
         });
 
@@ -131,5 +130,16 @@ Template.gamePage.events({
                 {$set: _.extend(_.omit(gameState(afterMove), 'combos'),
                     {moves: moves})});
         }
+    },
+
+    'click #undo-last-move': function (e) {
+        var gameId = _.last(window.location.pathname.split("/"));
+        var game = Games.findOne(gameId);
+        var moves = game.moves.slice(0, game.moves.length - 1);
+        var afterUndo = playAGame(createEmptyBoard(game.size), moves);
+
+        Games.update(gameId,
+            {$set: _.extend(_.omit(gameState(afterUndo), 'combos'),
+                {moves: moves})});
     }
 });
