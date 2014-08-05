@@ -20,7 +20,7 @@ var makeAMove = function (board, movement) {
 
 Template.gamePage.helpers({
     board: function () {
-        return _.reduce(this.movements, makeAMove, createEmptyBoard(3));
+        return _.reduce(this.movements, makeAMove, createEmptyBoard(this.size));
     }
 });
 

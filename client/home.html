@@ -1,9 +1,23 @@
 <template name="home">
     <div class="games">
+        <div class="pull-right">
+            <button type="button" class="btn btn-warning" id="start-new-game">
+                <span class="glyphicon glyphicon-plus-sign"></span> New Game
+            </button>
+            <select class="form-control" id="board-size" style="margin-top: 10px;">
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+            </select>
+        </div>
+
         <ul>
-        {{#each games}}
+            {{#each games}}
             <li><a href="{{pathFor 'gamePage'}}">{{_id}}</a> - {{status}}</li>
-        {{/each}}
+            {{/each}}
         </ul>
     </div>
 </template>
