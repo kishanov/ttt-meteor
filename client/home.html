@@ -1,0 +1,9 @@
+<template name="home">
+    <div class="games">
+        <ul>
+        {{#each games}}
+            <li><a href="{{pathFor 'gamePage'}}">{{_id}}</a> - {{status}}</li>
+        {{/each}}
+        </ul>
+    </div>
+</template>
